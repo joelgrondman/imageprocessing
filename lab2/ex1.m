@@ -17,11 +17,9 @@ Fscsi = im2uint8(Fscs);
 imwrite(Fscsi,'charactersspectrum.png')
 imwrite(fftshift(Fscsi),'charactersspectrumcentered.png')
 
-
-
 % average value
 ((F(1,1)*255)/size(image,1))/size(image,2)
-% compare
+% comparison
 sum(image(:))/(size(image,1)*size(image,2))
 
 

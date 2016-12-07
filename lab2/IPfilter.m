@@ -13,32 +13,8 @@ function X = IPfilter(image)
     X_dr = [zeros(1,nc) ; zeros(nr - 1,1) X(1:nr - 1,1:nc-1)]; % down right
     X_dl = [zeros(1,nc) ; X(1:nr-1,2:nc) zeros(nr - 1,1)];     % down left
     
-    % kernel
-    F = [1 1 1;                                        
-         1 1 1;
-         1 1 1];
-    
-    B = (X*F(2,2) + X_uu*F(1,2) + X_dd*F(3,2) + X_ll*F(2,1) +...
-        X_rr*F(2,3) + X_ur*F(1,3) + X_ul*F(1,1) + X_dr*F(3,3) +...
-        X_dl*F(3,1));                 % nonuniform filter
-    
-    % determine weight matrix, coefficient is different in edges
-    % apply weight to middle elements
-    B(2:nr-1,2:nc-1) = B(2:nr-1,2:nc-1)/sum(F(:));
-    
-    % apply weight on first and last rows
-    B(1,2:nc-1) = B(1,2:nc-1)/sum(sum(F(2:end,:)));
-    B(nr,2:nc-1) = B(nr,2:nc-1)/sum(sum(F(1:end-1,:)));
-    
-    % apply weight on first and last columns
-    B(2:nr-1,1) = B(2:nr-1,1)/sum(sum(F(:,2:end)));
-    B(2:nr-1,nc) = B(2:nr-1,nc)/sum(sum(F(:,1:end-1)));
-    
-    % apply weight to corners
-    B(1,1) = B(1,1)/sum(sum(F(2:end,2:end)));
-    B(nr,1) = B(nr,1)/sum(sum(F(2:end,1:end-1)));
-    B(1,nc) = B(1,nc)/sum(sum(F(1:end-1,2:end)));
-    B(nr,nc) = B(nr,nc)/sum(sum(F(1:end-1,1:end-1)));
+    % apply uniform filter
+    B = (X + X_uu + X_dd + X_ll + X_rr + X_ur + X_ul + X_dr + X_dl)/9;
     
     X = im2uint8(B);
 
