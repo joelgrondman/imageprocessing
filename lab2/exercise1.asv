@@ -1,7 +1,0 @@
-imname = 'characters.tif';
-
-image = imread(imname);
-
-imshow(image)
-
-spectrum(image)
