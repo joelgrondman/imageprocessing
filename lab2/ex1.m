@@ -11,7 +11,7 @@ Fs = abs(F);
 % contrast stretch
 M = max(Fs(:));
 m = min(Fs(:));
-Fscs = (256/(M-m))*(Fs-m);
+Fscs = (255/(M-m))*(Fs-m);
 
 Fscsi = im2uint8(Fscs);
 imwrite(Fscsi,'charactersspectrum.png')
