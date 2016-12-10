@@ -2,7 +2,8 @@ function g = IPwiener(f,H)
 
     F = fft2(double(f));
     
-    Fr = ((1./(H)).*abs(H)/(abs(H) + 1)) * F;
+    Hns = conj(H).*H;
+    Fr = ((conj(H)./((Hns + 0.01)))) .* F;
     
     g = ifft2(Fr);       % perform IFFT
     g = real(g);         % Take real part

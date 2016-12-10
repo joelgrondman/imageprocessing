@@ -19,5 +19,8 @@ noiseblurimage = imnoise(blurimage, 'gaussian',0,(10/256)^2);
 figure(3)
 imshow(noiseblurimage);
 
-figure(3)
-imshow(IPwiener(noiseblurimage,H));
+
+wienerimage = IPwiener(noiseblurimage,H);
+
+figure(4)
+imshow(wienerimage);

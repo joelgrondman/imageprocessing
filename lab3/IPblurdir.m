@@ -1,6 +1,6 @@
 function H = IPblurdir(M,N,a,b,T)
 
-    u=1:N; v=1:M;           % offset from image origin
+    u=0:N-1; v=0:M-1;           % offset from image origin
     
     cv=M/2;                     % center of (u,v) is defined as (M/2,N/2)
     cu=N/2;
