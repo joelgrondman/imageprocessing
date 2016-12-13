@@ -1,9 +1,7 @@
 function g = IPwiener(f,H)
 
     F = fft2(double(f));
-    
-    Hns = conj(H).*H;
-    Fr = ((conj(H)./((Hns + 0.01)))) .* F;
+    Fr = ((conj(H)./((conj(H).*H + 0.01)))) .* F; % apply Wiener filter
     
     g = ifft2(Fr);       % perform IFFT
     g = real(g);         % Take real part
