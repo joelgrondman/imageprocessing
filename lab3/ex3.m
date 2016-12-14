@@ -1,6 +1,7 @@
 clear all
 
-image = imread('darkstream.tif');
+imname = 'darkstream';
+image = imread([imname '.tif']);
 
 R = image(:,:,1); % extract RGB components
 G = image(:,:,2);
@@ -20,6 +21,7 @@ xlabel('Intensity level')
 ylabel('Occurrence')
 subplot(2,2,4)
 histogram(B); xlim([0,255])
+saveas(gcf,[imname 'RGB' '.png'])
 
 % image RGB seperately equalized
 R = histeq(R);
@@ -40,6 +42,7 @@ xlabel('Intensity level')
 ylabel('Occurrence')
 subplot(2,2,4)
 histogram(B); xlim([0,255])
+saveas(gcf,[imname 'RGBeq' '.png'])
 
 % image RGB average equalized
 R = image(:,:,1); % set color intensity values to original values
@@ -73,5 +76,6 @@ xlabel('Intensity level')
 ylabel('Occurrence')
 subplot(2,2,4)
 histogram(B); xlim([0,255])
+saveas(gcf,[imname 'RGBav' '.png'])
 
 
