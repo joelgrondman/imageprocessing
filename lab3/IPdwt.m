@@ -1,17 +1,20 @@
 function [ W ] = IPdwt( f , scale )
 
-H=[1];                %Haar wavelet for H_1 
-NC=1/sqrt(2);         %normalization constant 
-LP=[1 1];             %lowpass portion
-HP=[1 -1];            %highpass portion
+    fs = length(f);       %length of 1D discrete function
+    H = eye(length(f));   %Haar matrix (scale 0)
+    NC=1/sqrt(2);         %normalization constant 
+    LP=[1 1];             %lowpass portion
+    HP=[1 -1];            %highpass portion
 
 
-% iteration of H_n from H=[1] 
-for i=1:scale
-    H=NC*[kron(H,LP);kron(eye(size(H)),HP)];                                                 
-end
+    % iteration of H_n from H_0 
+    for i = 1:scale
+       s = fs/(2^(i-1));   % s indicates up to which rows of H to update
+       % compute H_i matrix
+       H(1:s,:) = NC * [kron(eye(s),LP) ; kron(eye(s),HP)]*H(1:s,:); 
+    end
 
-W=H*f'; %computes the coefficients
-W=W'; %outputs a row vector
+    W=H*f'; %computes the coefficients
+    W=W'; %outputs a row vector
 end
 
