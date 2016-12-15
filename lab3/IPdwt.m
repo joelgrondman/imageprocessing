@@ -9,9 +9,9 @@ function [ W ] = IPdwt( f , scale )
 
     % iteration of H_n from H_0 
     for i = 1:scale
-       s = fs/(2^(i-1));   % s indicates up to which rows of H to update
+       s = fs/(2^i);   % s indicates up to which rows of H to update
        % compute H_i matrix
-       H(1:s,:) = NC * [kron(eye(s),LP) ; kron(eye(s),HP)]*H(1:s,:); 
+       H(1:2*s,:) = NC * [kron(eye(s),LP) ; kron(eye(s),HP)]*H(1:2*s,:); 
     end
 
     W=H*f'; %computes the coefficients

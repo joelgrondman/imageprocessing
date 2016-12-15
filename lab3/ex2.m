@@ -1,10 +1,12 @@
-f=[1,4,-3,0];
-f2=[1,4,-3,0,1,4,-3,0];
+f=[1 -2 3 -4 5 -6 7 -8]
 
 
 disp('Discrete Wavelet Trandform of input function f')
-W=IPdwt(f2,3)
-
+for i = 0:3
+    W=IPdwt(f,i)
+end
 disp('Inverse Discrete Wavelet Transform of input function W')
-F=IPidwt(W,3)
+for i = 0:3
+    f=IPidwt(W,i)
+end
 
