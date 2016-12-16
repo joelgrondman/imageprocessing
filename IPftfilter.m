@@ -1,22 +1,21 @@
 function g = IPftfilter(f,H)
 
-
-    F = fft2(double(f)); % FFT of image fp
-    Gp = F .* H;       % Product of FFTs
-
-        %uncomment to save centered filtered result in frequency domain
-        %Fs = abs(fftshift(Gp));
-
-        % contrast stretch
-        %M = max(Fs(:));
-        %m = min(Fs(:));
-        %Fscs = (255/(M-m))*(Fs-m);
-        %Fscsi = im2uint8(Fscs);
-        %imwrite(Fscsi,'charactersspectrumfilteredcentered.png');
+    [M,N] = size(f);
+    P = 3*M;
+    Q = 3*N;
     
+    
+    fp = zeros(P,Q);
+    fp(1:M,1:N) = im2double(f);        % zero padding
+    
+    Fp = fft2(fp); % FFT of image fp
+    Fpc = fftshift(Fp);
+    Gpc = Fpc .* H;       % Product of FFTs
+    
+    Gp = ifftshift(Gpc);
     g = ifft2(Gp);       % perform IFFT
     g = real(g);         % Take real part
-    g = uint8(g);        % convert to uint8
-
+    g = im2uint8(g);        % convert to uint8
+    g = g(1:M,1:N);      % obtain M x N part
 end
 

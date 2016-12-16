@@ -1,13 +1,8 @@
 function g = IPwiener(f,H)
 
-    F = fft2(double(f));
+    Hi = ((conj(H)./((conj(H).*H + 0.01)))); % apply Wiener filter
     
-    Fr = ((1./(H)).*abs(H)/(abs(H) + 1)) * F;
-    
-    g = ifft2(Fr);       % perform IFFT
-    g = real(g);         % Take real part
-    g = uint8(g);        % convert to uint8
-
+    g = IPftfilter(f,Hi);
 
 end
 
