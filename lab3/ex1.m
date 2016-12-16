@@ -8,7 +8,7 @@ imwrite(image, [imname '.png'])
 T = 1;
 a = 0.1;
 b = 0.1;
-H = IPblurdir(M,N,a,b,T);
+H = IPblurdir(2*M,2*N,a,b,T);
 % save centered fourier spectrum of H
 imwrite(uint8(abs(fftshift(H))*255), 'Hspectrum.png')
 % apply fourier transform through PFftfilter
