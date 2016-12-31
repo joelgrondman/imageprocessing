@@ -1,4 +1,4 @@
-function image = IPdilate(f,F)
+function image = IPerosion(f,F)
 
     [nr,nc]=size(f);
     
@@ -11,8 +11,9 @@ function image = IPdilate(f,F)
     f_dr = [zeros(1,nc) ; zeros(nr - 1,1) f(1:nr - 1,1:nc-1)]; % down right
     f_dl = [zeros(1,nc) ; f(1:nr-1,2:nc) zeros(nr - 1,1)];     % down left
    
-    image = f_uu.*F(1,2)+f_dd.*F(3,2)+f_ll.*F(2,1)+f_rr.*F(2,3)+...
-            f_ur.*F(1,3)+f_ul.*F(1,1)+f_dr.*F(3,3)+f_dl.*F(3,1)+f.*F(2,2)...
-            > 0;
+    image = f_uu.*F(3,2)+f_dd.*F(1,2)+f_ll.*F(2,3)+f_rr.*F(2,1)+...
+            f_ur.*F(3,1)+f_ul.*F(3,3)+f_dr.*F(1,1)+f_dl.*F(1,3)+f.*F(2,2)...
+            == sum(sum(F));
+    
 end
 

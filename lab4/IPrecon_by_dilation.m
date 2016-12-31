@@ -7,14 +7,8 @@ function X = IPrecon_by_dilation(f,mask,se)
         
         Xo = X;
         X = IPdilate(X,se) == mask*2 - 1;
-        
-        figure(6)
-        imshow(X)
-        pause
     
     end
-    
-
 
 end
 
