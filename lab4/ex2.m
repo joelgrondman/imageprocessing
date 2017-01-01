@@ -12,4 +12,4 @@ figure(2)
 imshow(IPdilate(image,F))
 
 figure(3)
-imshow(IPerosion(image,F))
+image = IPerode(image,F);

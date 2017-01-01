@@ -22,7 +22,7 @@ countdiff = sum(sum(imagediff))
 figure(4)
 imshow(imagediff)
 
-imagerec = IPrecon_by_dilation(IPerosion(imagen,F),imagen,F);
+imagerec = IPrecon_by_dilation(IPerode(imagen,F),imagen,F);
 
 figure(5)
 imshow(imagerec)
