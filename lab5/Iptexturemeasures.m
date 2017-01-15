@@ -1,14 +1,22 @@
-function [ output_args ] = Iptexturemeasures( f )
+function [m, u2, R, u3, U, e] = IPtexturemeasures(f)
 
-z = 1;
+    p=histcounts(f,-0.5:255.5)/size(f(:),1);
+    figure(4)
+    plot(0:255,p)
+    m=sum((0:255).*p);                          %compute mean
+    u2 = sum((((0:255) - m).^2).*p);            %compute variance
 
-p=histcounts(f,-0.5:255.5)/size(f(:),1);
-m=mean(f(:));
-%u2=sum(sum(((double(f) - m).^2).*p(f)))
-u2=sum(sum(((double(f) - m).^2)))/size(f(:),1)
-u2 = u2/(255^2)
-varr = var(double(f(:)),1)
-u3=sum(sum(((double(f) - m).^3)))/size(f(:),1)
-u3 = u3/(255^3)
+    u2n = u2/(255^2);                           %normalize variance
+    R = 1 - 1/(1 + u2n);                        %measure R
+
+    u3 = sum((((0:255) - m).^3).*p);            %compute third moment
+    u3 = u3/(sqrt(u2)^3);
+    %u3 = u3/(255^3);                            %normalize third moment
+
+    U = sum(p.^2);                              %measure uniformity
+    pe = p.*log2(p);                            %steps to comput entropy
+    pe(isnan(pe)) = 0;                          %filter out nan's
+    e = -sum(pe);                               %measure average entropy
+
 end
 
