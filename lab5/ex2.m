@@ -17,4 +17,5 @@ for i = 1:3
     fprintf('Uniformity %6.3f\n',U)
     fprintf('Entropy %6.3f\n',e)
     fprintf('%6.3f &%6.3f &%6.3f &%6.3f &%6.3f &%6.3f\n',m,sqrt(u2),R,u3,U,e)
+    pause
 end

@@ -1,6 +1,6 @@
 function [m, u2, R, u3, U, e] = IPtexturemeasures(f)
 
-    p=histcounts(f,-0.5:255.5)/size(f(:),1);
+    p=histcounts(f,-0.5:255.5,'Normalization', 'probability');
     figure(4)
     plot(0:255,p)
     m=sum((0:255).*p);                          %compute mean
