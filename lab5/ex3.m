@@ -25,7 +25,7 @@ annotation('textbox', [0 0.9 1 0.1], 'String',...
 
 X=[band1(:)';band2(:)';band3(:)';band4(:)';band5(:)';band6(:)'];
 
-k=4;
+k=2;
 
 [X_r,y,eigen] = IPprincipalcomponents( X,k );
 
