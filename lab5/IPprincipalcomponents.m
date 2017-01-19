@@ -11,10 +11,10 @@ function [xp,y,eigen] = IPprincipalcomponents( f,k )
     A = A(:,I);                 
     A = A';                     %transpose s.t. each row is an eigenvector
 
-    y = A*(x - m);              %perform hotelling transform
+    y = A*(x - repmat(m,1,nv)); %perform hotelling transform
 
     At = A';
     %reconstruction from principal components (first k components)
-    xp = At(:,1:k)*y(1:k,:) + m;
+    xp = At(:,1:k)*y(1:k,:) + repmat(m,1,nv);
 
 end
