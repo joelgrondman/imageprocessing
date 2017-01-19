@@ -11,7 +11,7 @@ function [m, u2, R, u3, U, e] = IPtexturemeasures(f)
 
     u3 = sum((((0:255) - m).^3).*p);            %compute third moment
     u3 = u3/(sqrt(u2)^3);
-    %u3 = u3/(255^3);                            %normalize third moment
+    %u3 = u3/(255^3);                           %normalize third moment
 
     U = sum(p.^2);                              %measure uniformity
     pe = p.*log2(p);                            %steps to comput entropy
